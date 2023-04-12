@@ -1,0 +1,9 @@
+.navLink {
+  &_active {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  &_pending {
+    opacity: 0.9;
+  }
+}
