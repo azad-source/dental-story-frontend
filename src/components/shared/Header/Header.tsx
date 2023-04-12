@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { SITE_NAME } from 'variables';
+import { authPath, patientsPath } from 'domain/routes';
 
 const navClass = ({ isActive, isPending }: any) =>
     isPending ? styles.navLink_pending : isActive ? styles.navLink_active : '';
@@ -15,8 +16,8 @@ export const Header = () => {
                     </NavLink>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <CustomNavLink to="/" title="Главная" />
-                        <CustomNavLink to="/patients" title="Пациенты" />
-                        <CustomNavLink to="/auth" title="Авторизация" />
+                        <CustomNavLink to={patientsPath} title="Пациенты" />
+                        <CustomNavLink to={authPath} title="Авторизация" />
                     </ul>
                 </div>
             </nav>

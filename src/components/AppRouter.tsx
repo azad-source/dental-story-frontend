@@ -8,19 +8,29 @@ import { PatientDetailPage } from './Patients/PatientDetailPage/PatientDetailPag
 import { NewPatientPage } from './Patients/NewPatientPage/NewPatientPage';
 import { ToothDetailPage } from './Patients/ToothDetailPage/ToothDetailPage';
 import { NewToothPage } from './Patients/NewToothPage/NewToothPage';
+import {
+    authLoginPath,
+    authPath,
+    authRegistrationPath,
+    newPatientPath,
+    newToothPath,
+    patientPath,
+    patientsPath,
+    toothPath,
+} from 'domain/routes';
 
 export const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/auth/*" element={<AuthRoutes />} />
-            <Route path="/auth/authorization" element={<AuthorizationPage />} />
-            <Route path="/auth/registration" element={<RegistrationPage />} />
-            <Route path="/patients" element={<PatientsPage />} />
-            <Route path="/patients/:patientId" element={<PatientDetailPage />} />
-            <Route path="/patients/new" element={<NewPatientPage />} />
-            <Route path="/patients/:patientId/:toothId" element={<ToothDetailPage />} />
-            <Route path="/patients/:patientId/new" element={<NewToothPage />} />
+            <Route path={`${authPath}/*`} element={<AuthRoutes />} />
+            <Route path={authLoginPath} element={<AuthorizationPage />} />
+            <Route path={authRegistrationPath} element={<RegistrationPage />} />
+            <Route path={patientsPath} element={<PatientsPage />} />
+            <Route path={patientPath} element={<PatientDetailPage />} />
+            <Route path={newPatientPath} element={<NewPatientPage />} />
+            <Route path={toothPath} element={<ToothDetailPage />} />
+            <Route path={newToothPath} element={<NewToothPage />} />
         </Routes>
     );
 };
