@@ -1,15 +1,36 @@
 import { NavLink } from 'react-router-dom';
 import { MainLayout } from '../../shared/MainLayout/MainLayout';
+import { newPatientPath } from 'domain/routes';
+
+interface IPatientItem {
+    id: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+}
 
 export const PatientsPage = () => {
+    const patientsList: IPatientItem[] = [
+        { id: '1', firstName: 'Иван', lastName: 'Иванов', middleName: 'Иванович' },
+        { id: '2', firstName: 'Петр', lastName: 'Петров', middleName: 'Петрович' },
+        { id: '2', firstName: 'Александр', lastName: 'Александров', middleName: 'Александрович' },
+    ];
+
     return (
         <MainLayout>
-            <div>PatientsPage</div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <NavLink to={'1'}>Иванов Иван Иванович</NavLink>
-                <NavLink to={'2'}>Петров Петр Петрович</NavLink>
-                <NavLink to={'3'}>Александров Александр Александрович</NavLink>
-                <NavLink to={'new'}>Добавить пациента</NavLink>
+            <h5 className='row'>Пациенты</h5>
+            <div>
+                {patientsList.map(({ id, firstName, lastName, middleName }, index) => {
+                    return (
+                        <div key={id} className="row">
+                            <div className="col">{++index}</div>
+                            <NavLink to={'1'} className="col s11">
+                                {lastName} {firstName} {middleName}
+                            </NavLink>
+                        </div>
+                    );
+                })}
+                <NavLink to={newPatientPath} className='btn'>Добавить пациента</NavLink>
             </div>
         </MainLayout>
     );

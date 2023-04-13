@@ -1,6 +1,5 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { useState } from 'react';
-import cx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import { authLoginPath } from 'domain/routes';
 
@@ -72,7 +71,7 @@ export const RegistrationPage = () => {
                     </div>
                     <div className="row">
                         <input
-                            placeholder="password"
+                            placeholder="Пароль"
                             id="password"
                             type="password"
                             className="validate"
