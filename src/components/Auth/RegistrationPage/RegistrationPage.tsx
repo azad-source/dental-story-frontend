@@ -3,6 +3,11 @@ import { Paths } from 'domain/Paths';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuthSignupMutation } from 'store/api';
+import styles from './RegistrationPage.module.scss';
+import { Loader } from 'components/shared/Loader/Loader';
+import { Input } from 'components/shared/Input/Input';
+import { Button } from 'components/shared/Button/Button';
+import { EMAIL_PLACEHOLDER, FIRST_NAME_PLACEHOLDER, LAST_NAME_PLACEHOLDER, PASS_PLACEHOLDER } from 'variables';
 
 interface IFormState {
     firstName: string;
@@ -19,7 +24,7 @@ export const RegistrationPage = () => {
         password: '',
     });
 
-    const [signup, {}] = useAuthSignupMutation();
+    const [signup, { isLoading }] = useAuthSignupMutation();
 
     const handleInputChange = (target: keyof IFormState) => {
         return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,70 +43,42 @@ export const RegistrationPage = () => {
 
     return (
         <MainLayout>
-            <div className="row container">
-                <h5
-                    className="row red lighten-2 white-text center fon"
-                    style={{ marginTop: 30, padding: 10 }}
-                >
-                    Регистрация
-                </h5>
-                <form className="col s6 offset-s3" onSubmit={handleSubmit}>
-                    <div className="row">
-                        <input
-                            placeholder="Имя"
-                            id="first_name"
-                            type="text"
-                            className="validate"
+            <div className={styles.backplate}>
+                <Loader className={styles.root} isLoading={isLoading}>
+                    <div className={styles.title}>Регистрация</div>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <Input
+                            placeholder={FIRST_NAME_PLACEHOLDER}
                             value={form.firstName}
                             onChange={handleInputChange('firstName')}
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="Фамилия"
-                            id="last_name"
                             type="text"
-                            className="validate"
+                        />
+                        <Input
+                            placeholder={LAST_NAME_PLACEHOLDER}
                             value={form.lastName}
                             onChange={handleInputChange('lastName')}
+                            type="text"
                         />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="e-mail"
-                            id="email"
-                            type="email"
-                            className="validate"
+                        <Input
+                            placeholder={EMAIL_PLACEHOLDER}
                             value={form.email}
                             onChange={handleInputChange('email')}
+                            type="email"
                         />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="Пароль"
-                            id="password"
-                            type="password"
-                            className="validate"
+                        <Input
+                            placeholder={PASS_PLACEHOLDER}
                             value={form.password}
                             onChange={handleInputChange('password')}
+                            type="password"
                         />
-                    </div>
-                    <div className="row">
-                        <div className="col s12 m5">
-                            <button className="waves-effect waves-light btn center" type="submit">
-                                Регистрация
-                            </button>
-                        </div>
-                        <div className="col s12 m5 right">
-                            <NavLink
-                                to={Paths.authSignin}
-                                className="waves-effect waves-light btn center"
-                            >
+                        <div className={styles.bottomPanel}>
+                            <Button type="submit">Регистрация</Button>
+                            <Button type="reset" to={Paths.authSignin} use="transparent">
                                 Авторизация
-                            </NavLink>
+                            </Button>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </Loader>
             </div>
         </MainLayout>
     );

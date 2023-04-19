@@ -8,6 +8,7 @@ import styles from './AuthorizationPage.module.scss';
 import { Input } from 'components/shared/Input/Input';
 import { Button } from 'components/shared/Button/Button';
 import { Loader } from 'components/shared/Loader/Loader';
+import { EMAIL_PLACEHOLDER, PASS_PLACEHOLDER } from 'variables';
 
 interface IFormState {
     email: string;
@@ -47,16 +48,16 @@ export const AuthorizationPage = () => {
                     <div className={styles.title}>Авторизация</div>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <Input
-                            placeholder="e-mail"
+                            placeholder={EMAIL_PLACEHOLDER}
                             value={form.email}
                             onChange={handleInputChange('email')}
-                            type='email'
+                            type="email"
                         />
                         <Input
-                            placeholder="password"
+                            placeholder={PASS_PLACEHOLDER}
                             value={form.password}
                             onChange={handleInputChange('password')}
-                            type='password'
+                            type="password"
                         />
                         <div className={styles.bottomPanel}>
                             <Button type="submit">Войти</Button>
