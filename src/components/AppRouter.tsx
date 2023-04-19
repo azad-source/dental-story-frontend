@@ -18,19 +18,25 @@ import {
     patientsPath,
     toothPath,
 } from 'domain/routes';
+import { ProtectedRoute } from 'utils/ProtectedRoute';
+import { useAuth } from 'store/apiConfig';
 
 export const AppRouter = () => {
+    const [logged] = useAuth();
     return (
         <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path={`${authPath}/*`} element={<AuthRoutes />} />
             <Route path={authLoginPath} element={<AuthorizationPage />} />
             <Route path={authRegistrationPath} element={<RegistrationPage />} />
-            <Route path={patientsPath} element={<PatientsPage />} />
-            <Route path={patientPath} element={<PatientDetailPage />} />
-            <Route path={newPatientPath} element={<NewPatientPage />} />
-            <Route path={toothPath} element={<ToothDetailPage />} />
-            <Route path={newToothPath} element={<NewToothPage />} />
+
+            <Route element={<ProtectedRoute isLogged={logged} />}>
+                <Route path={patientsPath} element={<PatientsPage />} />
+                <Route path={patientPath} element={<PatientDetailPage />} />
+                <Route path={newPatientPath} element={<NewPatientPage />} />
+                <Route path={toothPath} element={<ToothDetailPage />} />
+                <Route path={newToothPath} element={<NewToothPage />} />
+            </Route>
         </Routes>
     );
 };

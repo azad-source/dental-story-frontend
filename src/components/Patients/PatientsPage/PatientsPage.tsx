@@ -13,7 +13,7 @@ export const PatientsPage = () => {
     const patientsList: IPatientItem[] = [
         { id: '1', firstName: 'Иван', lastName: 'Иванов', middleName: 'Иванович' },
         { id: '2', firstName: 'Петр', lastName: 'Петров', middleName: 'Петрович' },
-        { id: '2', firstName: 'Александр', lastName: 'Александров', middleName: 'Александрович' },
+        { id: '3', firstName: 'Александр', lastName: 'Александров', middleName: 'Александрович' },
     ];
 
     return (

@@ -1,7 +1,9 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { authRegistrationPath } from 'domain/routes';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuthSigninMutation } from 'store/api';
+import { login } from 'store/apiConfig';
 
 interface IFormState {
     email: string;
@@ -14,6 +16,10 @@ export const AuthorizationPage = () => {
         password: '',
     });
 
+    const [signin, {}] = useAuthSigninMutation();
+
+    const navigate = useNavigate();
+
     const handleInputChange = (target: keyof IFormState) => {
         return (e: React.ChangeEvent<HTMLInputElement>) => {
             setForm((p) => ({ ...p, [target]: e.target.value }));
@@ -22,7 +28,12 @@ export const AuthorizationPage = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: вызов метода для регистрации
+        signin({ email: form.email, password: form.password })
+            .unwrap()
+            .then((res) => {
+                login({ accessToken: res.accessToken });
+                navigate({ pathname: '/' });
+            });
     };
 
     return (

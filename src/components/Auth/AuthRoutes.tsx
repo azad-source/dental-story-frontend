@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { authPath, authRegistrationPath } from 'domain/routes';
+import { authLoginPath, authPath } from 'domain/routes';
 
 export const AuthRoutes = () => {
     const location = useLocation();
@@ -8,7 +8,7 @@ export const AuthRoutes = () => {
 
     useEffect(() => {
         if (location.pathname === authPath) {
-            navigate(authRegistrationPath);
+            navigate(authLoginPath);
         }
     }, [location.pathname]);
 

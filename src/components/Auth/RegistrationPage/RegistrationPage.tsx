@@ -2,6 +2,7 @@ import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { authLoginPath } from 'domain/routes';
+import { useAuthSignupMutation } from 'store/api';
 
 interface IFormState {
     firstName: string;
@@ -18,6 +19,8 @@ export const RegistrationPage = () => {
         password: '',
     });
 
+    const [signup, {}] = useAuthSignupMutation();
+
     const handleInputChange = (target: keyof IFormState) => {
         return (e: React.ChangeEvent<HTMLInputElement>) => {
             setForm((p) => ({ ...p, [target]: e.target.value }));
@@ -26,7 +29,11 @@ export const RegistrationPage = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: вызов метода для регистрации
+        signup({
+            email: form.email,
+            password: form.password,
+            username: `${form.lastName} ${form.firstName}`,
+        });
     };
 
     return (
@@ -82,7 +89,7 @@ export const RegistrationPage = () => {
                     <div className="row">
                         <div className="col">
                             <button className="waves-effect waves-light btn-large" type="submit">
-                                Создать
+                                Регистрация
                             </button>
                         </div>
                         <div className="col right">

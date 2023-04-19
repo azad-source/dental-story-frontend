@@ -1,12 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { SITE_NAME } from 'variables';
-import { authPath, patientsPath } from 'domain/routes';
+import { authLoginPath, authPath, patientsPath } from 'domain/routes';
+import { logout, useAuth } from 'store/apiConfig';
 
 const navClass = ({ isActive, isPending }: any) =>
     isPending ? styles.navLink_pending : isActive ? styles.navLink_active : '';
 
 export const Header = () => {
+    const [logged] = useAuth();
+
     return (
         <header>
             <nav>
@@ -17,7 +20,11 @@ export const Header = () => {
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <CustomNavLink to="/" title="Главная" />
                         <CustomNavLink to={patientsPath} title="Пациенты" />
-                        <CustomNavLink to={authPath} title="Авторизация" />
+                        {!logged ? (
+                            <CustomNavLink to={authLoginPath} title="Войти" />
+                        ) : (
+                            <CustomNavLink onClick={logout} title="Выйти" to={authPath} />
+                        )}
                     </ul>
                 </div>
             </nav>
@@ -26,14 +33,27 @@ export const Header = () => {
 };
 
 interface IPropsCustomNavLink {
-    to: string;
+    to?: string;
     title: string;
+    onClick?: () => void;
 }
 
-const CustomNavLink: React.FC<IPropsCustomNavLink> = ({ title, to }) => (
-    <li>
-        <NavLink to={to} className={navClass}>
-            {title}
-        </NavLink>
-    </li>
-);
+const CustomNavLink: React.FC<IPropsCustomNavLink> = ({ title, to = '', onClick }) => {
+    const handleClick = (e: React.MouseEvent) => {
+        if (onClick) {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log('клик по выйти');
+
+            onClick();
+        }
+    };
+
+    return (
+        <li>
+            <NavLink to={to} className={navClass} onClick={handleClick}>
+                {title}
+            </NavLink>
+        </li>
+    );
+};
