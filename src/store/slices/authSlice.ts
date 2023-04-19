@@ -14,9 +14,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: { user: null, accessToken: null } as AuthState,
     reducers: {
-        userLogout: (state) => {
-            console.log('разлогинились!');
-
+        clearCurrentUser: (state) => {
             localStorage.removeItem(ACCESS_TOKEN);
             state.user = null;
         },
@@ -30,6 +28,6 @@ const authSlice = createSlice({
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 
-export const { userLogout } = authSlice.actions;
+export const { clearCurrentUser } = authSlice.actions;
 
 export default authSlice.reducer;

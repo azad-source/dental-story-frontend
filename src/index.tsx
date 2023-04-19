@@ -6,7 +6,6 @@ import { AppRouter } from './components/AppRouter';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import 'variables.scss';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

@@ -8,34 +8,25 @@ import { PatientDetailPage } from './Patients/PatientDetailPage/PatientDetailPag
 import { NewPatientPage } from './Patients/NewPatientPage/NewPatientPage';
 import { ToothDetailPage } from './Patients/ToothDetailPage/ToothDetailPage';
 import { NewToothPage } from './Patients/NewToothPage/NewToothPage';
-import {
-    authLoginPath,
-    authPath,
-    authRegistrationPath,
-    newPatientPath,
-    newToothPath,
-    patientPath,
-    patientsPath,
-    toothPath,
-} from 'domain/routes';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
 import { useAuth } from 'store/apiConfig';
+import { Paths } from 'domain/Paths';
 
 export const AppRouter = () => {
     const [logged] = useAuth();
     return (
         <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path={`${authPath}/*`} element={<AuthRoutes />} />
-            <Route path={authLoginPath} element={<AuthorizationPage />} />
-            <Route path={authRegistrationPath} element={<RegistrationPage />} />
+            <Route path={`${Paths.auth}/*`} element={<AuthRoutes />} />
+            <Route path={Paths.authSignin} element={<AuthorizationPage />} />
+            <Route path={Paths.authSignup} element={<RegistrationPage />} />
 
             <Route element={<ProtectedRoute isLogged={logged} />}>
-                <Route path={patientsPath} element={<PatientsPage />} />
-                <Route path={patientPath} element={<PatientDetailPage />} />
-                <Route path={newPatientPath} element={<NewPatientPage />} />
-                <Route path={toothPath} element={<ToothDetailPage />} />
-                <Route path={newToothPath} element={<NewToothPage />} />
+                <Route path={Paths.patients} element={<PatientsPage />} />
+                <Route path={Paths.patient} element={<PatientDetailPage />} />
+                <Route path={Paths.newPatient} element={<NewPatientPage />} />
+                <Route path={Paths.tooth} element={<ToothDetailPage />} />
+                <Route path={Paths.newTooth} element={<NewToothPage />} />
             </Route>
         </Routes>
     );

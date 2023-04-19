@@ -1,6 +1,42 @@
-@import 'materialize-css/sass/components/_color-variables';
+/** Colors */
+$main-color: #ef777c;
+$headerBg: $main-color;
 
-$primary-color: lighten(#ee6e73, 2) !default;
+/** Text */
+$mainText: rgba(50,50,50,0.9);
+$topMenuLink: rgba(255,255,255,0.9);
+$linkColor: rgba(4, 16, 117, 0.76);
+
+/** Dark theme */
+$darkBg: rgb(60, 64, 67);
+$darkBgHeader: rgb(36, 39, 41);
+$darkBgFooter: $darkBgHeader;
+$darkTextColor: #ddd;
+$darkBorderColor: #888;
+$darkBgContent: rgb(43, 47, 49);
+$darkBgInput: #ddd;
+$darkBgInputText: #333;
+$darkBgInputPlaceholder: #777;
+
+// Dimensions
+$siteWidth: 1024px;
+$siteWidthTab: 768px;
+$siteWidthMobile: 500px;
+$siteWidthMobileXS: 360px;
+$headerHeight: 80px;
+$footerHeight: 100px;
+$sideSpace: 24px;
+
+// 480px size
+$sideSpace_480: 18px;
+
+@mixin themeSwitchTransition {
+  transition: 0.3s ease-in;
+}
+
+// @import 'materialize-css/sass/components/_color-variables';
+
+// $primary-color: lighten(#ee6e73, 2) !default;
 // $primary-color-light: false !default;
 // $primary-color-dark: false !default;
 // @if not $primary-color-light {
@@ -15,4 +51,4 @@ $primary-color: lighten(#ee6e73, 2) !default;
 
 // $link-color: color('light-blue', 'darken-1') !default;
 
-@import 'materialize-css';
+// @import 'materialize-css';

@@ -1,5 +1,5 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
-import { authRegistrationPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthSigninMutation } from 'store/api';
@@ -74,7 +74,7 @@ export const AuthorizationPage = () => {
                         </div>
                         <div className="col right">
                             <NavLink
-                                to={authRegistrationPath}
+                                to={Paths.authSignup}
                                 className="waves-effect waves-light btn-large"
                             >
                                 Регистрация

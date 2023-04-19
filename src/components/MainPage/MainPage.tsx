@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MainLayout } from '../shared/MainLayout/MainLayout';
 import { useEffect } from 'react';
-import { patientsPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 
 export const MainPage = () => {
     const location = useLocation();
@@ -9,7 +9,7 @@ export const MainPage = () => {
 
     useEffect(() => {
         if (location.pathname === '/') {
-            navigate(patientsPath);
+            navigate(Paths.patients);
         }
     }, [location.pathname]);
 

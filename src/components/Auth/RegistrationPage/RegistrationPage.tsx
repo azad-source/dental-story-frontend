@@ -1,7 +1,7 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
+import { Paths } from 'domain/Paths';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { authLoginPath } from 'domain/routes';
 import { useAuthSignupMutation } from 'store/api';
 
 interface IFormState {
@@ -87,15 +87,15 @@ export const RegistrationPage = () => {
                         />
                     </div>
                     <div className="row">
-                        <div className="col">
-                            <button className="waves-effect waves-light btn-large" type="submit">
+                        <div className="col s12 m5">
+                            <button className="waves-effect waves-light btn center" type="submit">
                                 Регистрация
                             </button>
                         </div>
-                        <div className="col right">
+                        <div className="col s12 m5 right">
                             <NavLink
-                                to={authLoginPath}
-                                className="waves-effect waves-light btn-large"
+                                to={Paths.authSignin}
+                                className="waves-effect waves-light btn center"
                             >
                                 Авторизация
                             </NavLink>

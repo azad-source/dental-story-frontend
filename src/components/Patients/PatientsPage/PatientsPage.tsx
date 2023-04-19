@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { MainLayout } from '../../shared/MainLayout/MainLayout';
-import { newPatientPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 
 interface IPatientItem {
     id: string;
@@ -30,7 +30,7 @@ export const PatientsPage = () => {
                         </div>
                     );
                 })}
-                <NavLink to={newPatientPath} className='btn'>Добавить пациента</NavLink>
+                <NavLink to={Paths.newPatient} className='btn'>Добавить пациента</NavLink>
             </div>
         </MainLayout>
     );

@@ -1,4 +1,4 @@
-import { authLoginPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 import { Navigate, Outlet } from 'react-router-dom';
 
 interface IProps {
@@ -6,7 +6,10 @@ interface IProps {
     redirectPath?: string;
 }
 
-export const ProtectedRoute: React.FC<IProps> = ({ isLogged, redirectPath = authLoginPath }) => {
+export const ProtectedRoute: React.FC<IProps> = ({
+    isLogged,
+    redirectPath = Paths.authSignin,
+}) => {
     if (!isLogged) {
         return <Navigate to={redirectPath} replace />;
     }

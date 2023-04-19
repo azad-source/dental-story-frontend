@@ -1,59 +1,122 @@
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import styles from './Header.module.scss';
-import { SITE_NAME } from 'variables';
-import { authLoginPath, authPath, patientsPath } from 'domain/routes';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import cx from 'clsx';
 import { logout, useAuth } from 'store/apiConfig';
+import { useAppDispatch } from 'store/hooks';
+import { clearCurrentUser } from 'store/slices/authSlice';
+import { Paths } from 'domain/Paths';
+import { SITE_NAME } from 'variables';
+import { Menu } from '../Menu/Menu';
+import { MenuMobile } from '../Menu/MenuMobile';
+// import { Logo } from 'components/shared/icons/Logo';
+// import { SearchField } from 'components/shared/layout/SearchField/SearchField';
+// import { SiteName } from 'domain/SiteInfo';
+// import { Menu } from 'components/shared/layout/Menu/Menu';
+// import { Paths } from 'utils/routes/Paths';
+// import { SwitchThemeToggle } from 'components/shared/SwitchThemeToggle/SwitchThemeToggle';
 
-const navClass = ({ isActive, isPending }: any) =>
-    isPending ? styles.navLink_pending : isActive ? styles.navLink_active : '';
+// import { MenuMobile } from 'components/shared/layout/Menu/MenuMobile';
+// import { useAppDispatch, useAppSelector } from 'redux/hooks';
+// import { isDarkTheme, switchTheme } from 'redux/slices/appSlice';
+// import { useLazySearchAuthorsQuery, useLazySearchSheetsQuery } from 'redux/api/searchApi';
+// import { logout, useAuth, useLazyGetUserDataQuery } from 'redux/api/userApi';
+// import { addSearch } from 'redux/slices/searchSlice';
+// import { clearCurrentUser, setCurrentUser, currentUserSelector } from 'redux/slices/userSlice';
+
+export type MenuItemType = { caption: React.ReactNode; link?: string; handler?: () => void };
 
 export const Header = () => {
+    // const [searchAuthors, { isSuccess: isSearchAuthorsSuccess }] = useLazySearchAuthorsQuery();
+    // const [searchSheets, { isSuccess: isSearchSheetsSuccess }] = useLazySearchSheetsQuery();
+    // const [getCurrentUser] = useLazyGetUserDataQuery();
+
+    // const currentUser = useAppSelector(currentUserSelector);
+
+    const [searchQuery, setSearchQuery] = React.useState<string>('');
+
+    // const isSuccess = isSearchAuthorsSuccess && isSearchSheetsSuccess;
+
     const [logged] = useAuth();
 
-    return (
-        <header>
-            <nav>
-                <div className="nav-wrapper container">
-                    <NavLink to="/" className="brand-logo">
-                        {SITE_NAME}
-                    </NavLink>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <CustomNavLink to="/" title="Главная" />
-                        <CustomNavLink to={patientsPath} title="Пациенты" />
-                        {!logged ? (
-                            <CustomNavLink to={authLoginPath} title="Войти" />
-                        ) : (
-                            <CustomNavLink onClick={logout} title="Выйти" to={authPath} />
-                        )}
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    );
-};
+    const location = useLocation();
 
-interface IPropsCustomNavLink {
-    to?: string;
-    title: string;
-    onClick?: () => void;
-}
+    const dispatch = useAppDispatch();
 
-const CustomNavLink: React.FC<IPropsCustomNavLink> = ({ title, to = '', onClick }) => {
-    const handleClick = (e: React.MouseEvent) => {
-        if (onClick) {
-            e.stopPropagation();
-            e.preventDefault();
-            console.log('клик по выйти');
+    const navigate = useNavigate();
 
-            onClick();
-        }
+    const isDark = false; //useAppSelector(isDarkTheme);
+
+    // const themeTogglerHandler = () => {
+    //     dispatch(switchTheme(isDark ? 'light' : 'dark'));
+    // };
+
+    React.useEffect(() => {
+        // document.title = SiteName;
+        // if (logged && !currentUser?.id) {
+        //     getCurrentUser()
+        //         .unwrap()
+        //         .then((user) => dispatch(setCurrentUser(user)));
+        // }
+    }, [location]);
+
+    const logoutHandler = () => {
+        logout();
+        dispatch(clearCurrentUser());
+        navigate(Paths.authSignin);
     };
 
+    // const handleSearch = (query: string) => {
+    //     Promise.all([searchAuthors({ query }).unwrap(), searchSheets({ query }).unwrap()])
+    //         .then(([authors, sheets]) => {
+    //             dispatch(addSearch({ authors, sheets, query, applied: true }));
+    //         })
+    //         .finally(() => {
+    //             setSearchQuery(query);
+    //         });
+    // };
+
+    // const handleDropSearch = () => {};
+
+    const menuItems: MenuItemType[] = [
+        { caption: 'Главная', link: Paths.mainPage },
+        { caption: 'Пациенты', link: Paths.patients },
+        {
+            caption: logged ? 'Выйти' : 'Войти',
+            link: !logged ? Paths.authSignin : undefined,
+            handler: logged ? logoutHandler : undefined,
+        },
+        // {
+        //     caption: (
+        //         <SwitchThemeToggle
+        //             className={styles.switchTheme}
+        //             isDark={isDark}
+        //             themeToggler={themeTogglerHandler}
+        //         />
+        //     ),
+        // },
+    ];
+
     return (
-        <li>
-            <NavLink to={to} className={navClass} onClick={handleClick}>
-                {title}
-            </NavLink>
-        </li>
+        <header className={cx(styles.backplate, isDark && styles.backplate__dark)}>
+            <div className={styles.root}>
+                <NavLink className={styles.logo} to="/">
+                    <div className={styles.logoIcon}>
+                        {/* <Logo className={styles.svg} /> */}
+                        {SITE_NAME}
+                    </div>
+                </NavLink>
+                {/* <SearchField
+                    query={searchQuery}
+                    searchSheets={handleSearch}
+                    dropSearch={handleDropSearch}
+                    isSuccess={isSuccess}
+                    className={styles.search}
+                    isDark={isDark}
+                /> */}
+                <Menu items={menuItems} isDark={isDark} />
+                <MenuMobile items={menuItems} isDark={isDark} />
+            </div>
+        </header>
     );
 };

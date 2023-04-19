@@ -1,8 +1,7 @@
 import { BreadcrumbProps } from 'components/shared/Breadcrumbs/Breadcrumbs';
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
-import { patientsPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 import { useState } from 'react';
-import M from 'materialize-css';
 
 interface IFormState {
     firstName: string;
@@ -20,7 +19,7 @@ export const NewPatientPage = () => {
     });
 
     const breadcrumbs: BreadcrumbProps[] = [
-        { caption: 'Пациенты', link: patientsPath },
+        { caption: 'Пациенты', link: Paths.patients },
         { caption: '' },
     ];
 

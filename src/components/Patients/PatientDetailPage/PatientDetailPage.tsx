@@ -1,13 +1,13 @@
 import { BreadcrumbProps } from 'components/shared/Breadcrumbs/Breadcrumbs';
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
-import { patientsPath } from 'domain/routes';
+import { Paths } from 'domain/Paths';
 import { NavLink, useParams } from 'react-router-dom';
 
 export const PatientDetailPage = () => {
     const { patientId } = useParams<{ patientId: string }>();
 
     const breadcrumbs: BreadcrumbProps[] = [
-        { caption: 'Пациенты', link: patientsPath },
+        { caption: 'Пациенты', link: Paths.patients },
         { caption: patientId || '' },
     ];
 
