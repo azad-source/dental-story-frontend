@@ -16,6 +16,12 @@ export const { useAuth, authFetch, login, logout } = createAuthProvider<Session>
     //     }).then((r) => r.json()),
 });
 
+function delay(ms: number) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms);
+    });
+}
+
 export const baseURL = process.env.BASE_API_URL || 'http://localhost:8080/api';
 
 export const axiosBaseQuery: BaseQueryFnType = async (
@@ -31,6 +37,7 @@ export const axiosBaseQuery: BaseQueryFnType = async (
     }
 
     try {
+        await delay(2000);
         const response = await axios({
             baseURL,
             method,

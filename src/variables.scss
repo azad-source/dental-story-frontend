@@ -1,12 +1,17 @@
 /** Colors */
 $mainColor: #ef777c;
+$secondaryColor: #bd6ebb;
 $headerBg: $mainColor;
 $footerBg: $mainColor;
+$defaultButtonBg: $mainColor;
 
 /** Text */
-$mainText: rgba(50, 50, 50, 0.9);
+$mainText: $mainColor;
 $topMenuLink: rgba(255, 255, 255, 0.9);
 $linkColor: rgba(4, 16, 117, 0.76);
+
+/** Error/warning/info */
+$errorMessage: rgb(220, 0, 0);
 
 /** Dark theme */
 $darkBg: rgb(60, 64, 67);

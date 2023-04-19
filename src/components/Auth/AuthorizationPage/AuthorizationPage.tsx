@@ -1,9 +1,13 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { Paths } from 'domain/Paths';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthSigninMutation } from 'store/api';
 import { login } from 'store/apiConfig';
+import styles from './AuthorizationPage.module.scss';
+import { Input } from 'components/shared/Input/Input';
+import { Button } from 'components/shared/Button/Button';
+import { Loader } from 'components/shared/Loader/Loader';
 
 interface IFormState {
     email: string;
@@ -16,7 +20,7 @@ export const AuthorizationPage = () => {
         password: '',
     });
 
-    const [signin, {}] = useAuthSigninMutation();
+    const [signin, { isLoading }] = useAuthSigninMutation();
 
     const navigate = useNavigate();
 
@@ -38,50 +42,30 @@ export const AuthorizationPage = () => {
 
     return (
         <MainLayout>
-            <div className="row container">
-                <h5
-                    className="row red lighten-2 white-text center fon"
-                    style={{ marginTop: 30, padding: 10 }}
-                >
-                    Авторизация
-                </h5>
-                <form className="col s6 offset-s3" onSubmit={handleSubmit}>
-                    <div className="row">
-                        <input
+            <div className={styles.backplate}>
+                <Loader className={styles.root} isLoading={isLoading}>
+                    <div className={styles.title}>Авторизация</div>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <Input
                             placeholder="e-mail"
-                            id="email"
-                            type="email"
-                            className="validate"
                             value={form.email}
                             onChange={handleInputChange('email')}
+                            type='email'
                         />
-                    </div>
-                    <div className="row">
-                        <input
+                        <Input
                             placeholder="password"
-                            id="password"
-                            type="password"
-                            className="validate"
                             value={form.password}
                             onChange={handleInputChange('password')}
+                            type='password'
                         />
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <button className="waves-effect waves-light btn-large" type="submit">
-                                Войти
-                            </button>
-                        </div>
-                        <div className="col right">
-                            <NavLink
-                                to={Paths.authSignup}
-                                className="waves-effect waves-light btn-large"
-                            >
+                        <div className={styles.bottomPanel}>
+                            <Button type="submit">Войти</Button>
+                            <Button type="reset" to={Paths.authSignup} use="transparent">
                                 Регистрация
-                            </NavLink>
+                            </Button>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </Loader>
             </div>
         </MainLayout>
     );
