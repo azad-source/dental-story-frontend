@@ -1,0 +1,52 @@
+@import 'variables';
+
+.backplate {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(80, 109, 200);
+  background: $footerBg;
+  box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &__dark {
+    background: $darkBgFooter;
+    @include themeSwitchTransition;
+  }
+}
+
+.root {
+  width: $siteWidth;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  padding: 30px $sideSpace;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.item {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.link {
+  font-size: 16px;
+}
+
+@media screen and (max-width: $siteWidth) {
+  .root {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+  .copyright {
+    order: 100;
+  }
+}
+
+@media screen and (max-width: $siteWidthTab) {
+  .root {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
