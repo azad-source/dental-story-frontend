@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 import { Paths } from 'domain/Paths';
 
 export const MainPage = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+    // const location = useLocation();
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        if (location.pathname === '/') {
-            navigate(Paths.patients);
-        }
-    }, [location.pathname]);
+    // useEffect(() => {
+    //     if (location.pathname === '/') {
+    //         navigate(Paths.patients);
+    //     }
+    // }, [location.pathname]);
 
     return <MainLayout>MainPage</MainLayout>;
 };

@@ -9,7 +9,7 @@ interface IPatientItem {
     middleName: string;
 }
 
-export const PatientsPage = () => {
+export const PatientsMain = () => {
     const patientsList: IPatientItem[] = [
         { id: '1', firstName: 'Иван', lastName: 'Иванов', middleName: 'Иванович' },
         { id: '2', firstName: 'Петр', lastName: 'Петров', middleName: 'Петрович' },
@@ -18,7 +18,7 @@ export const PatientsPage = () => {
 
     return (
         <MainLayout>
-            <h5 className='row'>Пациенты</h5>
+            <h5 className="row">Пациенты</h5>
             <div>
                 {patientsList.map(({ id, firstName, lastName, middleName }, index) => {
                     return (
@@ -30,7 +30,9 @@ export const PatientsPage = () => {
                         </div>
                     );
                 })}
-                <NavLink to={Paths.newPatient} className='btn'>Добавить пациента</NavLink>
+                <NavLink to={Paths.newPatient} className="btn">
+                    Добавить пациента
+                </NavLink>
             </div>
         </MainLayout>
     );

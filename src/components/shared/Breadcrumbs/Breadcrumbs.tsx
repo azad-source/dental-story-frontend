@@ -9,7 +9,7 @@ export interface BreadcrumbProps {
 
 interface IProps {
     items: BreadcrumbProps[];
-    className: string;
+    className?: string;
 }
 
 export const Breadcrumbs: React.FC<IProps> = ({ items, className }) => {

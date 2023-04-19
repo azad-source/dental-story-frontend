@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Paths } from 'domain/Paths';
+import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 
-export const AuthRoutes = () => {
+export const AuthMain = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -12,5 +13,5 @@ export const AuthRoutes = () => {
         }
     }, [location.pathname]);
 
-    return <div></div>;
+    return <MainLayout></MainLayout>;
 };

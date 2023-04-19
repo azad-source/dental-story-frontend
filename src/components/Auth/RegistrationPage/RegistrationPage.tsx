@@ -1,13 +1,19 @@
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { Paths } from 'domain/Paths';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthSignupMutation } from 'store/api';
 import styles from './RegistrationPage.module.scss';
 import { Loader } from 'components/shared/Loader/Loader';
 import { Input } from 'components/shared/Input/Input';
 import { Button } from 'components/shared/Button/Button';
-import { EMAIL_PLACEHOLDER, FIRST_NAME_PLACEHOLDER, LAST_NAME_PLACEHOLDER, PASS_PLACEHOLDER } from 'variables';
+import {
+    EMAIL_PLACEHOLDER,
+    FIRST_NAME_PLACEHOLDER,
+    LAST_NAME_PLACEHOLDER,
+    PASS_PLACEHOLDER,
+} from 'variables';
+import { delay } from 'store/apiConfig';
 
 interface IFormState {
     firstName: string;
@@ -16,15 +22,14 @@ interface IFormState {
     password: string;
 }
 
+const defaultForm = { firstName: '', lastName: '', email: '', password: '' };
+
 export const RegistrationPage = () => {
-    const [form, setForm] = useState<IFormState>({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-    });
+    const [form, setForm] = useState<IFormState>({ ...defaultForm });
 
     const [signup, { isLoading }] = useAuthSignupMutation();
+
+    const navigate = useNavigate();
 
     const handleInputChange = (target: keyof IFormState) => {
         return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +43,14 @@ export const RegistrationPage = () => {
             email: form.email,
             password: form.password,
             username: `${form.lastName} ${form.firstName}`,
-        });
+        })
+            .unwrap()
+            .then(() => {
+                setForm({ ...defaultForm });
+                delay(1000).then(() => {
+                    navigate({ pathname: Paths.authSignin });
+                });
+            });
     };
 
     return (

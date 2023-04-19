@@ -6,13 +6,9 @@ interface IProps {
     redirectPath?: string;
 }
 
-export const ProtectedRoute: React.FC<IProps> = ({
-    isLogged,
-    redirectPath = Paths.authSignin,
-}) => {
+export const ProtectedRoute: React.FC<IProps> = ({ isLogged, redirectPath = Paths.authSignin }) => {
     if (!isLogged) {
         return <Navigate to={redirectPath} replace />;
     }
-
     return <Outlet />;
 };

@@ -3,11 +3,12 @@ import { BaseQueryFnType } from './types';
 import axios from 'axios';
 import { ACCESS_TOKEN } from 'variables';
 import { createAuthProvider } from 'react-token-auth';
+import { getAuthToken } from 'helpers/tokenHelper';
 
 type Session = { accessToken: string /*refreshToken: string*/ };
 
 export const { useAuth, authFetch, login, logout } = createAuthProvider<Session>({
-    getAccessToken: (session) => session.accessToken,
+    getAccessToken: (session) => session.accessToken || getAuthToken().access,
     storage: localStorage,
     // onUpdateToken: (token) =>
     //     fetch('/update-token', {
@@ -16,7 +17,7 @@ export const { useAuth, authFetch, login, logout } = createAuthProvider<Session>
     //     }).then((r) => r.json()),
 });
 
-function delay(ms: number) {
+export function delay(ms: number) {
     return new Promise((resolve, reject) => {
         setTimeout(resolve, ms);
     });
