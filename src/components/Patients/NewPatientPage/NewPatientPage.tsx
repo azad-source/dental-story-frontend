@@ -1,14 +1,26 @@
 import { BreadcrumbProps } from 'components/shared/Breadcrumbs/Breadcrumbs';
+import { Button } from 'components/shared/Button/Button';
+import { Input } from 'components/shared/Input/Input';
+import { Loader } from 'components/shared/Loader/Loader';
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { Paths } from 'domain/Paths';
 import { useState } from 'react';
+import styles from './NewPatientPage.module.scss';
+import {
+    AGE_PLACEHOLDER,
+    FIRST_NAME_PLACEHOLDER,
+    LAST_NAME_PLACEHOLDER,
+    MIDDLE_NAME_PLACEHOLDER,
+} from 'variables';
+import Select from 'react-select';
+import { ActionMeta, SingleValue } from 'react-select';
 
 interface IFormState {
     firstName: string;
     lastName: string;
     middleName?: string;
     age?: number;
-    sex?: 'жен.' | 'муж.';
+    sex?: string;
     email?: string;
 }
 
@@ -29,68 +41,72 @@ export const NewPatientPage = () => {
         };
     };
 
+    const handleChangeSex = (
+        newValue: SingleValue<{
+            value: string;
+            label: string;
+        }>,
+        actionMeta: ActionMeta<{
+            value: string;
+            label: string;
+        }>,
+    ) => {
+        if (newValue?.value) {
+            setForm((p) => ({ ...p, sex: newValue.value }));
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // TODO: вызов метода для добавления пациента
     };
 
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var elems = document.querySelectorAll('select');
-    //     var instances = M.FormSelect.init(elems);
-    // });
-
     return (
-        <MainLayout breadcrumbs={breadcrumbs}>
-            <h5>Добавление нового пациента</h5>
-
-            <div className="row">
-                <form className="col s4" onSubmit={handleSubmit}>
-                    <div className="row">
-                        <input
-                            placeholder="Имя"
-                            type="text"
+        <MainLayout breadcrumbs={breadcrumbs} showBackButton>
+            <div className={styles.backplate}>
+                <Loader className={styles.root} isLoading={false}>
+                    <div className={styles.title}>Добавление нового пациента</div>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <Input
+                            placeholder={FIRST_NAME_PLACEHOLDER}
                             value={form.firstName}
                             onChange={handleInputChange('firstName')}
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="Фамилия"
                             type="text"
+                        />
+                        <Input
+                            placeholder={LAST_NAME_PLACEHOLDER}
                             value={form.lastName}
                             onChange={handleInputChange('lastName')}
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="Отчество"
                             type="text"
+                        />
+                        <Input
+                            placeholder={MIDDLE_NAME_PLACEHOLDER}
                             value={form.middleName || ''}
                             onChange={handleInputChange('middleName')}
-                        />
-                    </div>
-                    <div className="row">
-                        <input
-                            placeholder="Возраст"
                             type="text"
-                            value={form.age || ''}
-                            onChange={handleInputChange('age')}
                         />
-                    </div>
-                    <div className="row">
-                        <select>
-                            <option value="1">Женский</option>
-                            <option value="2">Мужской</option>
-                        </select>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <button className="waves-effect waves-light btn-large" type="submit">
-                                Добавить
-                            </button>
+                        <Input
+                            placeholder={AGE_PLACEHOLDER}
+                            value={`${form.age}`}
+                            onChange={handleInputChange('age')}
+                            type="number"
+                        />
+                        <div className={styles.sex}>
+                            <Select
+                                options={[
+                                    { value: 'woomen', label: 'Женский' },
+                                    { value: 'men', label: 'Мужской' },
+                                ]}
+                                onChange={handleChangeSex}
+                                className={styles.sex__select}
+                                placeholder="Выберите пол"
+                            />
                         </div>
-                    </div>
-                </form>
+                        <div className={styles.bottomPanel}>
+                            <Button type="submit">Добавить</Button>
+                        </div>
+                    </form>
+                </Loader>
             </div>
         </MainLayout>
     );

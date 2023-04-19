@@ -16,6 +16,7 @@ interface Props {
     title?: string;
     size?: 'small' | 'middle' | 'large';
     to?: string;
+    width?: number;
     onClick?: (e: MouseEvent) => void;
 }
 
@@ -28,6 +29,7 @@ export const Button: React.FC<Props> = ({
     title,
     size = 'middle',
     to,
+    width,
     ...props
 }) => {
     // FIXME: fix dark theme
@@ -43,6 +45,8 @@ export const Button: React.FC<Props> = ({
         }
     };
 
+    const style = { width: `${width}px`, minWidth: `${width}px` };
+
     return (
         <div className={className} onClick={handleToLink}>
             <button
@@ -55,6 +59,7 @@ export const Button: React.FC<Props> = ({
                     isDark && styles.root__dark,
                 )}
                 title={title}
+                style={style}
                 {...props}
             >
                 {!!icon && <div className={styles.icon}>{icon}</div>}

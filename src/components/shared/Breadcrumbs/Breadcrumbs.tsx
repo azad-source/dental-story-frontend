@@ -20,7 +20,7 @@ export const Breadcrumbs: React.FC<IProps> = ({ items, className }) => {
     };
 
     return (
-        <div className="container">
+        <div className={styles.backplate}>
             <div className={styles.root}>
                 {items.map(({ caption, link }) => (
                     <div key={caption}>
