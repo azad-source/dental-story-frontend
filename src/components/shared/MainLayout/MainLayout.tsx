@@ -33,7 +33,7 @@ export const MainLayout: React.FC<IProps> = ({ breadcrumbs, showBackButton = fal
             <Header />
             <div className={styles.subHeader}>
                 <div className={styles.subHeader__inner}>
-                    {!!breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+                    {/* {!!breadcrumbs && <Breadcrumbs items={breadcrumbs} />} */}
                     {showBackButton && (
                         <Button
                             icon={<BackIcon />}

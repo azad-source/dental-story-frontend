@@ -25,13 +25,15 @@ $baseColor: rgb(217, 226, 255);
   justify-content: space-between;
   box-sizing: border-box;
   margin-top: 15px;
+  overflow-x: scroll;
 
   &__item {
-    width: 100%;
+    width: 150px;
     text-align: center;
     padding: 15px 0;
     cursor: pointer;
     font-size: 18px;
+    flex-shrink: 0;
 
     &_active {
       font-weight: bold;

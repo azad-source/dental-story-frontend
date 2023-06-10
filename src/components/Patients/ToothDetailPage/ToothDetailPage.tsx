@@ -13,7 +13,7 @@ export const ToothDetailPage = () => {
     ];
 
     return (
-        <MainLayout breadcrumbs={breadcrumbs}>
+        <MainLayout showBackButton>
             <div>ToothDetailPage </div>
             <div>patientId: {patientId}</div>
             <div>toothId: {toothId}</div>

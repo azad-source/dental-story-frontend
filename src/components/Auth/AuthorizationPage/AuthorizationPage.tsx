@@ -38,6 +38,9 @@ export const AuthorizationPage = () => {
             .then((res) => {
                 login({ accessToken: res.accessToken });
                 navigate({ pathname: '/' });
+            })
+            .catch(() => {
+                alert('Не удалось авторизоваться!');
             });
     };
 

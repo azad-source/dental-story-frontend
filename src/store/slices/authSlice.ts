@@ -20,9 +20,9 @@ const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addMatcher(api.endpoints.authSignin.matchFulfilled, (state, { payload }) => {
-            state.user = decodeToken(payload.accessToken) as IUser;
-        });
+        // builder.addMatcher(api.endpoints.authSignin.matchFulfilled, (state, { payload }) => {
+        //     state.user = decodeToken(payload.accessToken) as IUser;
+        // });
     },
 });
 

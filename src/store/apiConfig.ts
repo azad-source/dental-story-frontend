@@ -38,7 +38,8 @@ export const axiosBaseQuery: BaseQueryFnType = async (
     }
 
     try {
-        await delay(2000);
+        /** TODO: имитация задержки. Нужно будет убрать */
+        await delay(1000);
         const response = await axios({
             baseURL,
             method,

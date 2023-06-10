@@ -1,0 +1,62 @@
+@import 'variables';
+
+.title {
+  font-size: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.patients {
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.patientRow {
+  font-size: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__num {
+    margin-right: 10px;
+  }
+}
+
+.fullName {
+  width: 250px;
+}
+
+.lastDateReception {
+  width: 200px;
+}
+
+.age {
+  width: 50px;
+}
+
+.sex {
+  width: 100px;
+}
+
+td,
+th {
+  text-align: center;
+  
+}
+
+th {
+  padding: 20px 40px;
+  background-color: $mainColor;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+td {
+  padding: 10px 0;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.addPatientButton {
+    margin-top: 20px;
+}
