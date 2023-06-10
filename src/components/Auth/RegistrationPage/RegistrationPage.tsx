@@ -14,6 +14,14 @@ import {
     PASS_PLACEHOLDER,
 } from 'variables/fieldVariables';
 import { delay } from 'store/apiConfig';
+import { useForm } from 'react-hook-form';
+import baseStyles from 'styles/base.module.scss';
+import {
+    EMAIL_VALIDATE,
+    SIGNUP_FIRSTNAME_VALIDATE,
+    SIGNUP_LASTNAME_VALIDATE,
+    SIGNUP_PASSWORD_VALIDATE,
+} from 'utils/validate';
 
 interface IFormState {
     firstName: string;
@@ -22,34 +30,32 @@ interface IFormState {
     password: string;
 }
 
-const defaultForm = { firstName: '', lastName: '', email: '', password: '' };
-
 export const RegistrationPage = () => {
-    const [form, setForm] = useState<IFormState>({ ...defaultForm });
+    const { register, handleSubmit, formState } = useForm<IFormState>();
+
+    const { errors } = formState;
+
+    const [responseError, setResponseError] = useState('');
 
     const [signup, { isLoading }] = useAuthSignupMutation();
 
     const navigate = useNavigate();
 
-    const handleInputChange = (target: keyof IFormState) => {
-        return (e: React.ChangeEvent<HTMLInputElement>) => {
-            setForm((p) => ({ ...p, [target]: e.target.value }));
-        };
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const onSubmit = (data: IFormState) => {
         signup({
-            email: form.email,
-            password: form.password,
-            username: `${form.lastName} ${form.firstName}`,
+            email: data.email,
+            password: data.password,
+            username: `${data.lastName} ${data.firstName}`,
         })
             .unwrap()
             .then(() => {
-                setForm({ ...defaultForm });
+                setResponseError('');
                 delay(1000).then(() => {
                     navigate({ pathname: Paths.authSignin });
                 });
+            })
+            .catch((err) => {
+                setResponseError(err.message);
             });
     };
 
@@ -58,31 +64,38 @@ export const RegistrationPage = () => {
             <div className={styles.backplate}>
                 <Loader className={styles.root} isLoading={isLoading}>
                     <div className={styles.title}>Регистрация</div>
-                    <form className={styles.form} onSubmit={handleSubmit}>
+                    <form className={styles.form} noValidate onSubmit={handleSubmit(onSubmit)}>
                         <Input
+                            type="text"
                             placeholder={FIRST_NAME_PLACEHOLDER}
-                            value={form.firstName}
-                            onChange={handleInputChange('firstName')}
-                            type="text"
+                            errors={errors.firstName}
+                            required
+                            register={register('firstName', SIGNUP_FIRSTNAME_VALIDATE)}
                         />
                         <Input
+                            type="text"
                             placeholder={LAST_NAME_PLACEHOLDER}
-                            value={form.lastName}
-                            onChange={handleInputChange('lastName')}
-                            type="text"
+                            errors={errors.lastName}
+                            required
+                            register={register('lastName', SIGNUP_LASTNAME_VALIDATE)}
                         />
                         <Input
-                            placeholder={EMAIL_PLACEHOLDER}
-                            value={form.email}
-                            onChange={handleInputChange('email')}
                             type="email"
+                            placeholder={EMAIL_PLACEHOLDER}
+                            errors={errors.email}
+                            required
+                            register={register('email', EMAIL_VALIDATE)}
                         />
                         <Input
-                            placeholder={PASS_PLACEHOLDER}
-                            value={form.password}
-                            onChange={handleInputChange('password')}
                             type="password"
+                            placeholder={PASS_PLACEHOLDER}
+                            errors={errors.password}
+                            required
+                            register={register('password', SIGNUP_PASSWORD_VALIDATE)}
                         />
+                        {!!responseError && (
+                            <div className={baseStyles.errors}>{responseError}</div>
+                        )}
                         <div className={styles.bottomPanel}>
                             <Button type="submit">Регистрация</Button>
                             <Button type="reset" to={Paths.authSignin} use="transparent">

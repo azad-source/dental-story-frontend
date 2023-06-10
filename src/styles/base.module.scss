@@ -1,0 +1,9 @@
+@import 'variables/stylesVariables';
+
+.errors {
+  margin-top: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  color: $errorMessage;
+}

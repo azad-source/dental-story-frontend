@@ -11,7 +11,8 @@ import { Loader } from 'components/shared/Loader/Loader';
 import { EMAIL_PLACEHOLDER, PASS_PLACEHOLDER } from 'variables/fieldVariables';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { SIGNIN_EMAIL_VALIDATE, SIGNIN_PASSWORD_VALIDATE } from 'utils/validate';
+import { EMAIL_VALIDATE, SIGNIN_PASSWORD_VALIDATE } from 'utils/validate';
+import baseStyles from 'styles/base.module.scss';
 
 interface IFormState {
     email: string;
@@ -53,7 +54,7 @@ export const AuthorizationPage = () => {
                             placeholder={EMAIL_PLACEHOLDER}
                             errors={errors.email}
                             required
-                            register={register('email', SIGNIN_EMAIL_VALIDATE)}
+                            register={register('email', EMAIL_VALIDATE)}
                         />
                         <Input
                             type="password"
@@ -62,7 +63,9 @@ export const AuthorizationPage = () => {
                             required
                             register={register('password', SIGNIN_PASSWORD_VALIDATE)}
                         />
-                        {!!responseError && <div className={styles.errors}>{responseError}</div>}
+                        {!!responseError && (
+                            <div className={baseStyles.errors}>{responseError}</div>
+                        )}
                         <div className={styles.bottomPanel}>
                             <Button type="submit">Войти</Button>
                             <Button type="reset" to={Paths.authSignup} use="transparent">
