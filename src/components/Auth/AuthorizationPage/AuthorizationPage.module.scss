@@ -26,6 +26,7 @@
   border-radius: 6px;
   overflow: hidden;
   position: relative;
+  width: 500px;
 }
 
 .title {
@@ -55,4 +56,11 @@
   display: flex;
   justify-content: space-between;
   padding: 30px;
+}
+
+.errors {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  color: $errorMessage;
 }

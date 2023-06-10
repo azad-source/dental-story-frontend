@@ -1,77 +1,39 @@
 import * as React from 'react';
 import styles from './Input.module.scss';
 import cx from 'clsx';
+import { InputHTMLAttributes } from 'react';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-interface Props {
-    value?: string;
-    type?:
-        | 'button'
-        | 'checkbox'
-        | 'color'
-        | 'date'
-        | 'datetime-local'
-        | 'email'
-        | 'file'
-        | 'hidden'
-        | 'image'
-        | 'month'
-        | 'number'
-        | 'password'
-        | 'radio'
-        | 'range'
-        | 'reset'
-        | 'search'
-        | 'submit'
-        | 'tel'
-        | 'text'
-        | 'time'
-        | 'url'
-        | 'week';
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-    placeholder?: string;
-    id?: string;
-    className?: string;
-    autoFocus?: boolean;
-    accept?: string;
-    size?: number;
-    maxLength?: number;
-    minLength?: number;
-    required?: boolean;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     icon?: React.ReactNode;
-    width?: number | string;
-    checked?: boolean;
+    register?: UseFormRegisterReturn<string>;
+    errors?: FieldError;
 }
 
-export const Input: React.FC<Props> = ({
-    id,
-    className,
-    type = 'text',
-    required,
-    icon,
-    width,
-    checked,
-    onClick,
-    ...props
-}) => {
-    const rootStyles = { width };
+export const Input: React.FC<Props> = (props) => {
+    const rootStyles = { width: props.width };
+    const type = props.type || 'text';
 
     // FIXME: fix dark theme
     const isDark = false; //useAppSelector(isDarkTheme);
 
     return (
-        <div className={cx(styles.root, isDark && styles.root__dark)} style={rootStyles}>
-            <span className={cx(required && styles.required)} title="Это поле обязательное" />
-            <input
-                type={type}
-                required={required}
-                id={id}
-                className={cx(styles.input, className, styles[type])}
-                checked={checked}
-                {...props}
-            />
-            <div onClick={onClick}>{icon}</div>
+        <div className={styles.root} style={rootStyles}>
+            {props.required && (
+                <span className={styles.root_required} title="Это поле обязательное">
+                    *
+                </span>
+            )}
+            <div className={styles.root__wrapper}>
+                <input
+                    type={type}
+                    className={cx(styles.input, props.className, styles[type])}
+                    {...props.register}
+                    {...props}
+                />
+                <div onClick={props.onClick}>{props.icon}</div>
+            </div>
+            <div className={styles.root__error}>{props.errors?.message}</div>
         </div>
     );
 };

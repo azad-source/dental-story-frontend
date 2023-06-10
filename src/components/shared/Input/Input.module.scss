@@ -1,32 +1,31 @@
-@import 'variables';
+@import 'variables/stylesVariables';
 
 .root {
+  display: block;
   position: relative;
-  display: flex;
-  flex-direction: row;
 
-  &__dark {
-    .input {
-      color: $darkBgInputText;
-      border-color: $darkBorderColor;
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+  }
 
-      &::placeholder {
-        color: $darkBgInputPlaceholder;
-      }
+  &__error {
+    min-height: 24px;
+    padding: 4px 8px;
+    color: $errorMessage;
+    font-size: 12px;
+    box-sizing: border-box;
+  }
 
-      &.text {
-        background: $darkBgInput;
-      }
-
-      &.file {
-        background: transparent;
-        color: $darkTextColor;
-      }
-    }
-
-    .required::before {
-      color: $darkTextColor;
-    }
+  &_required {
+    position: absolute;
+    padding: 5px;
+    box-sizing: border-box;
+    top: 10px;
+    left: -5px;
+    z-index: 10;
+    color: $errorMessage;
+    line-height: 1;
   }
 }
 
@@ -53,19 +52,6 @@
 
 .file {
   font-size: 14px;
-}
-
-.required {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &::before {
-    position: relative;
-    content: '*';
-    color: $errorMessage;
-    margin-right: 6px;
-  }
 }
 
 .checkbox {

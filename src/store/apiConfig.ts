@@ -53,7 +53,7 @@ export const axiosBaseQuery: BaseQueryFnType = async (
         }
 
         return response;
-    } catch (axiosError: any) {
-        return axiosError;
+    } catch (err: any) {
+        throw new Error(err.response?.data?.message);
     }
 };
