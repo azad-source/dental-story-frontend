@@ -1,7 +1,7 @@
 import { isExpired } from 'react-jwt';
 import { BaseQueryFnType } from './types';
 import axios from 'axios';
-import { ACCESS_TOKEN } from 'variables';
+import { ACCESS_TOKEN } from 'variables/fieldVariables';
 import { createAuthProvider } from 'react-token-auth';
 import { getAuthToken } from 'helpers/tokenHelper';
 

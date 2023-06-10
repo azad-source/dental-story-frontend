@@ -12,7 +12,7 @@ import {
     FIRST_NAME_PLACEHOLDER,
     LAST_NAME_PLACEHOLDER,
     PASS_PLACEHOLDER,
-} from 'variables';
+} from 'variables/fieldVariables';
 import { delay } from 'store/apiConfig';
 
 interface IFormState {

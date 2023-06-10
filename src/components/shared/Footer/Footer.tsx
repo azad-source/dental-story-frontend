@@ -2,7 +2,7 @@ import { TextPlain } from 'components/shared/TextPlain/TextPlain';
 import * as React from 'react';
 import styles from './Footer.module.scss';
 import cx from 'clsx';
-import { SITE_NAME } from 'variables';
+import { SITE_NAME } from 'variables/fieldVariables';
 
 interface Props {
     isDark?: boolean;

@@ -6,7 +6,7 @@ import { logout, useAuth } from 'store/apiConfig';
 import { useAppDispatch } from 'store/hooks';
 import { clearCurrentUser } from 'store/slices/authSlice';
 import { Paths } from 'domain/Paths';
-import { SITE_NAME } from 'variables';
+import { SITE_NAME } from 'variables/fieldVariables';
 import { Menu } from '../Menu/Menu';
 import { MenuMobile } from '../Menu/MenuMobile';
 // import { Logo } from 'components/shared/icons/Logo';

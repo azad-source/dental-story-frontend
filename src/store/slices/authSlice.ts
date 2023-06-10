@@ -3,7 +3,7 @@ import { decodeToken } from 'react-jwt';
 import { api } from 'store/api';
 import { IUser } from 'store/models/userModels';
 import { RootState } from 'store/store';
-import { ACCESS_TOKEN } from 'variables';
+import { ACCESS_TOKEN } from 'variables/fieldVariables';
 
 type AuthState = {
     user: IUser | null;

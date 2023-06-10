@@ -11,7 +11,7 @@ import {
     FIRST_NAME_PLACEHOLDER,
     LAST_NAME_PLACEHOLDER,
     MIDDLE_NAME_PLACEHOLDER,
-} from 'variables';
+} from 'variables/fieldVariables';
 import Select from 'react-select';
 import { ActionMeta, SingleValue } from 'react-select';
 
