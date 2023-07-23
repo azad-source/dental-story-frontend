@@ -31,7 +31,7 @@ export const AppRouter = () => {
 
     return (
         <Routes>
-            <Route path={Paths.mainPage} element={<ProtectedRoute isLogged={logged} />}>
+            <Route path={Paths.mainPage} element={<ProtectedRoute isLogged={true} />}>
                 <Route path={Paths.mainPage} element={<MainPage />} />
             </Route>
 

@@ -1,0 +1,17 @@
+@import 'variables/stylesVariables';
+
+.root {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+
+  &__inner {
+    width: $siteWidth;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+  }
+}

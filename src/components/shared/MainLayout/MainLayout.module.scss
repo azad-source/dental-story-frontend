@@ -6,32 +6,34 @@
   height: 100vh;
 }
 
-.subHeader {
-  width: 100%;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-
-  &__inner {
-    width: $siteWidth;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 10px;
-  }
-}
-
 .backplate {
   display: flex;
-  justify-content: center;
   box-sizing: border-box;
   position: relative;
   width: 100%;
   height: 100%;
+  padding: 8px;
+  z-index: 10;
 }
 
-.inner {
-  width: $siteWidth;
-  margin-top: 20px !important;
+.content {
+  box-shadow: $mainShadow;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.content {
+  width: 100%;
+  margin-left: 10px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: $siteWidthMobile) {
+  .content {
+    width: 100%;
+    margin-top: 20px !important;
+  }
 }

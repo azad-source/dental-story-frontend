@@ -7,9 +7,10 @@ import { useAppDispatch } from 'store/hooks';
 import { clearCurrentUser } from 'store/slices/authSlice';
 import { Paths } from 'domain/Paths';
 import { SITE_NAME } from 'variables/fieldVariables';
-import { Menu } from '../Menu/Menu';
+// import { Menu } from '../Menu/Menu';
 import { MenuMobile } from '../Menu/MenuMobile';
 import { AvatarMini } from '../AvatarMini/AvatarMini';
+import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
 // import { Logo } from 'components/shared/icons/Logo';
 // import { SearchField } from 'components/shared/layout/SearchField/SearchField';
 // import { SiteName } from 'domain/SiteInfo';
@@ -115,9 +116,14 @@ export const Header = () => {
                     className={styles.search}
                     isDark={isDark}
                 /> */}
-                <Menu items={menuItems} isDark={isDark} />
-                <AvatarMini name="Azad Mamedov" />
+                {/* <Menu items={menuItems} isDark={isDark} /> */}
+
                 <MenuMobile items={menuItems} isDark={isDark} />
+                {logged && (
+                    <DropdownMenu items={menuItems} className={styles.dropdownMenu}>
+                        <AvatarMini name="Azad Mamedov" />
+                    </DropdownMenu>
+                )}
             </div>
         </header>
     );

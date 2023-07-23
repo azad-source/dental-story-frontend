@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Avatar from 'assets/profile-avatar-200x200.png';
-
 import { AvatarMini } from './AvatarMini';
 
 const meta = {

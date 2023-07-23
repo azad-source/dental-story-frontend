@@ -13,5 +13,5 @@ export const MainPage = () => {
     //     }
     // }, [location.pathname]);
 
-    return <MainLayout>MainPage</MainLayout>;
+    return <MainLayout>Dental Story - CRM система для стоматологий и клиник</MainLayout>;
 };

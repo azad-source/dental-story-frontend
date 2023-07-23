@@ -24,7 +24,10 @@ $darkBgInput: #ddd;
 $darkBgInputText: #333;
 $darkBgInputPlaceholder: #777;
 
-// Dimensions
+/** Box-shadows */
+$mainShadow: 0px 2px 4px 3px rgba(34, 60, 80, 0.2);
+
+/** Dimensions */
 $siteWidth: 1024px;
 $siteWidthTab: 768px;
 $siteWidthMobile: 500px;
