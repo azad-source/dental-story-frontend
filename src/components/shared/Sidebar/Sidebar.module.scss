@@ -27,19 +27,23 @@
       display: flex;
       font-size: 16px;
 
+      &__icon {
+        margin-right: 16px;
+        color: #455caa;
+      }
+
+      &__caption {
+        margin-right: 12px;
+      }
+
       &:hover {
         color: #fff;
         background: $mainColor;
 
-        .icon {
+        svg {
           color: #fff;
         }
       }
-    }
-
-    .icon {
-      margin-right: 16px;
-      color: #455caa;
     }
 
     .submenu {
@@ -70,10 +74,6 @@
       }
     }
   }
-}
-
-.arrowIcon {
-  margin-left: 12px;
 }
 
 @keyframes menuitemDropdown {

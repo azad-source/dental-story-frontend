@@ -12,12 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
     args: {
-        items: [
-            { caption: 'Главная', link: '/' },
-            { caption: 'Пациенты', link: '/patients' },
-            { caption: 'Профиль', link: '/profile' },
-            { caption: 'Выйти', handler: () => alert('test') },
-        ],
         children: <button>Click me</button>,
     },
 };

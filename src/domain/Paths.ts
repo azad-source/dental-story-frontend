@@ -8,5 +8,10 @@ export class Paths {
     public static readonly newPatient = `${Paths.patients}/new`;
     public static readonly tooth = `${Paths.patient}/:toothId`;
     public static readonly newTooth = `${Paths.patient}/new`;
+    public static readonly schedule = '/schedule';
+    public static readonly primaryInspection = '/primary-inspection';
+    public static readonly diseaseHistory = '/disease-history';
+    public static readonly laboratoryWorks = '/laboratory-works';
+    public static readonly reports = '/reports';
     public static getPatientPathById = (id: string) => `${Paths.patients}/${id}`;
 }

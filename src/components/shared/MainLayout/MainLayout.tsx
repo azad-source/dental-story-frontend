@@ -1,10 +1,11 @@
 import { BreadcrumbProps } from '../Breadcrumbs/Breadcrumbs';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { Footer } from '../Footer/Footer';
-import { Header } from '../Header/Header';
 import styles from './MainLayout.module.scss';
 import { PageNavigation } from '../PageNavigation/PageNavigation';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { Header } from '../Header/Header';
+import { MENU_ITEMS } from 'domain/menu';
 
 interface IProps {
     breadcrumbs?: BreadcrumbProps[];
