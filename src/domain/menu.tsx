@@ -12,7 +12,7 @@ export type MenuItemType = {
     handler?: () => void;
 };
 
-export const MENU_ITEMS: MenuItemType[] = [
+export const LEFT_MENU_ITEMS: MenuItemType[] = [
     { caption: 'Расписание', link: Paths.schedule, icon: <CalendarIcon /> },
     { caption: 'Пациенты', link: Paths.patients, icon: <PeopleIcon /> },
     {

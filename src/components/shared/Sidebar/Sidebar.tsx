@@ -4,13 +4,13 @@ import cx from 'clsx';
 import { ArrowdownIcon } from '../icons/ArrowdownIcon';
 import { ArrowupIcon } from '../icons/ArrowupIcon';
 import { useNavigate } from 'react-router-dom';
-import { MENU_ITEMS, MenuItemType } from 'domain/menu';
+import { LEFT_MENU_ITEMS, MenuItemType } from 'domain/menu';
 
 export const Sidebar = () => {
     return (
         <div className={styles.root}>
             <div className={styles.menu}>
-                {MENU_ITEMS.map((v) => (
+                {LEFT_MENU_ITEMS.map((v) => (
                     <MenuItem value={v} key={v.caption} />
                 ))}
             </div>

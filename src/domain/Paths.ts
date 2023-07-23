@@ -13,5 +13,6 @@ export class Paths {
     public static readonly diseaseHistory = '/disease-history';
     public static readonly laboratoryWorks = '/laboratory-works';
     public static readonly reports = '/reports';
+    public static readonly settings = '/settings';
     public static getPatientPathById = (id: string) => `${Paths.patients}/${id}`;
 }

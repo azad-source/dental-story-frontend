@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Menu.module.scss';
 import cx from 'clsx';
-import { MENU_ITEMS } from 'domain/menu';
+import { LEFT_MENU_ITEMS } from 'domain/menu';
 
 interface Props {
     isDark?: boolean;
@@ -11,8 +11,8 @@ interface Props {
 export const Menu: React.FC<Props> = ({ isDark = false }) => {
     return (
         <div className={cx(styles.root, isDark && styles.root__dark)}>
-            {MENU_ITEMS.length > 0 &&
-                MENU_ITEMS.map(({ caption, link, handler }, idx) => {
+            {LEFT_MENU_ITEMS.length > 0 &&
+                LEFT_MENU_ITEMS.map(({ caption, link, handler }, idx) => {
                     if (link || handler) {
                         return (
                             <NavLink

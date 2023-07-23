@@ -74,7 +74,9 @@ export const PatientsMain = () => {
                     ))}
                 </tbody>
             </table>
-            <Button to={Paths.newPatient} className={styles.addPatientButton}>Добавить пациента</Button>
+            <Button to={Paths.newPatient} className={styles.addPatientButton}>
+                Добавить пациента
+            </Button>
         </MainLayout>
     );
 };

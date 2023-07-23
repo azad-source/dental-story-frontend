@@ -29,7 +29,7 @@ export const PageNavigation: React.FC<IProps> = ({ showBackButton = false, bread
             <div className={styles.subHeader__inner}>
                 {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
                 {showBackButton && (
-                    <Button icon={<BackIcon />} use="transparent" width={50} onClick={handleBack} />
+                    <Button icon={<BackIcon />} use="transparent" width={25} onClick={handleBack} size='xsmall' />
                 )}
             </div>
         </div>

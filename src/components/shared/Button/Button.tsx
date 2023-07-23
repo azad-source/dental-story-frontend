@@ -14,7 +14,7 @@ interface Props {
     type?: 'button' | 'submit' | 'reset' | undefined;
     icon?: React.ReactNode;
     title?: string;
-    size?: 'small' | 'middle' | 'large';
+    size?: 'xsmall' | 'small' | 'middle' | 'large';
     to?: string;
     width?: number;
     onClick?: (e: MouseEvent) => void;
