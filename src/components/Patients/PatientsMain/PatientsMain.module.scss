@@ -1,19 +1,35 @@
 @import 'variables/stylesVariables';
 
+.root {
+  // overflow: hidden;
+}
+
 .title {
   font-size: 28px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
+.tableWrapper {
+  overflow-x: scroll;
+  padding-bottom: 2px;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background-color: #777;
+}
+
 .patients {
   margin-top: 20px;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .patientRow {
-  font-size: 16px;
-
   &:not(:last-child) {
     margin-bottom: 10px;
   }
@@ -23,8 +39,8 @@
   }
 }
 
-.fullName {
-  width: 250px;
+.recordCount {
+  margin-left: 4px;
 }
 
 .lastDateReception {
@@ -42,21 +58,31 @@
 td,
 th {
   text-align: center;
-  
 }
 
 th {
-  padding: 20px 40px;
+  font-size: 14px;
+  padding: 10px;
   background-color: $mainColor;
   color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  &:first-child {
+    border-left-color: $mainColor;
+  }
+
+  &:last-child {
+    border-right-color: $mainColor;
+  }
 }
 
 td {
-  padding: 10px 0;
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  line-height: 1.5;
 }
 
 .addPatientButton {
-    margin-top: 20px;
+  margin-top: 20px;
 }

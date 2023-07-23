@@ -1,79 +1,40 @@
-import { NavLink } from 'react-router-dom';
 import { MainLayout } from '../../shared/MainLayout/MainLayout';
 import { Paths } from 'domain/Paths';
 import styles from './PatientsMain.module.scss';
 import cx from 'clsx';
 import { Button } from 'components/shared/Button/Button';
-
-type SexType = 'men' | 'woomen';
-interface IPatientItem {
-    id: string;
-    firstName: string;
-    lastName: string;
-    sex: SexType;
-    middleName?: string;
-    age?: number;
-    lastDateReception?: string;
-}
+import { IPatient } from 'store/models/patientModel';
+import { patientListMock } from 'mock/patientsMock';
 
 export const PatientsMain = () => {
-    const patientsList: IPatientItem[] = [
-        {
-            id: '1',
-            firstName: 'Иван',
-            lastName: 'Иванов',
-            middleName: 'Иванович',
-            sex: 'men',
-            age: 20,
-            lastDateReception: '23.04.2022',
-        },
-        {
-            id: '2',
-            firstName: 'Иван',
-            lastName: 'Иванов',
-            middleName: 'Иванович',
-            sex: 'men',
-            age: 20,
-            lastDateReception: '23.04.2022',
-        },
-        {
-            id: '3',
-            firstName: 'Иван',
-            lastName: 'Иванов',
-            middleName: 'Иванович',
-            sex: 'men',
-            age: 20,
-            lastDateReception: '23.04.2022',
-        },
-        {
-            id: '4',
-            firstName: 'Иван',
-            lastName: 'Иванов',
-            middleName: 'Иванович',
-            sex: 'men',
-            age: 20,
-            lastDateReception: '23.04.2022',
-        },
-    ];
-
     return (
-        <MainLayout showBackButton>
+        <MainLayout showBackButton className={styles.root}>
             <div className={styles.title}>Пациенты</div>
-            <table className={styles.patients}>
-                <thead>
-                    <tr>
-                        <th className={styles.fullName}>Имя</th>
-                        <th className={styles.age}>Возраст</th>
-                        <th className={styles.lastDateReception}>Дата последнего приема</th>
-                        <th className={styles.sex}>Пол</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {patientsList.map((item) => (
-                        <PatientRow key={item.id} patient={item} />
-                    ))}
-                </tbody>
-            </table>
+            <div className={styles.tableWrapper}>
+                <table className={styles.patients}>
+                    <thead>
+                        <tr>
+                            <th style={{ minWidth: 200 }}>ФИО</th>
+                            <th style={{ minWidth: 115 }}>Телефон</th>
+                            <th style={{ minWidth: 200 }}>Врачи</th>
+                            <th style={{ minWidth: 70 }}>Записей</th>
+                            <th style={{ minWidth: 100 }}>Дата рожд.</th>
+                            <th style={{ minWidth: 100 }}>ИИН</th>
+                            <th style={{ minWidth: 160 }}>Адрес</th>
+                            <th style={{ minWidth: 100 }}>Номер карты</th>
+                            <th style={{ minWidth: 80 }}>Оплачено</th>
+                            <th style={{ minWidth: 80 }}>Долг</th>
+                            <th style={{ minWidth: 80 }}>Переплата</th>
+                            <th style={{ minWidth: 200 }}>Последний прием</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {patientListMock.map((item) => (
+                            <PatientRow key={item.id} patient={item} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             <Button to={Paths.newPatient} className={styles.addPatientButton}>
                 Добавить пациента
             </Button>
@@ -82,23 +43,38 @@ export const PatientsMain = () => {
 };
 
 interface IPatientRowProps {
-    patient: IPatientItem;
+    patient: IPatient;
     className?: string;
 }
 
 const PatientRow: React.FC<IPatientRowProps> = ({ patient, className }) => {
-    const { id, firstName, lastName, middleName, age, lastDateReception, sex } = patient;
-
-    const fullName = `${lastName} ${firstName} ${middleName}`;
+    const fullName = `${patient.lastName} ${patient.firstName} ${patient.middleName}`;
 
     return (
         <tr className={cx(styles.patientRow, className)}>
-            <td className={styles.fullName}>
-                <NavLink to={id}>{fullName}</NavLink>
+            <td>{fullName}</td>
+            <td>{patient.phone}</td>
+            <td>
+                {patient.doctors?.map(({ name, recordCount }) => (
+                    <div key={name}>
+                        <span>{name}</span>
+                        <span className={styles.recordCount}>({recordCount})</span>
+                    </div>
+                ))}
             </td>
-            <td className={styles.age}>{age || '—'}</td>
-            <td className={styles.lastDateReception}>{lastDateReception || '—'}</td>
-            <td className={styles.sex}>{sex}</td>
+            <td>{patient.totalRecords}</td>
+            <td>{patient.birthday}</td>
+            <td>{patient.iin}</td>
+            <td>{patient.address}</td>
+            <td>{patient.cardNumber}</td>
+            <td>{patient.payed}</td>
+            <td>{patient.debt}</td>
+            <td>{patient.excess}</td>
+            <td>
+                <div>{patient.lastDateReception?.doctorName}</div>
+                <div>{patient.lastDateReception?.date}</div>
+                <div>{patient.lastDateReception?.timePeriod}</div>
+            </td>
         </tr>
     );
 };

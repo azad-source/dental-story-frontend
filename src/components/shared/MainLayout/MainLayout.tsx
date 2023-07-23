@@ -7,12 +7,14 @@ import { Sidebar } from '../Sidebar/Sidebar';
 import { Header } from '../Header/Header';
 import { useAuth } from 'store/apiConfig';
 import { Loader } from '../Loader/Loader';
+import cx from 'clsx';
 
 interface IProps {
     breadcrumbs?: BreadcrumbProps[];
     showBackButton?: boolean;
     isLoading?: boolean;
     children?: React.ReactNode;
+    className?: string;
 }
 
 export const MainLayout: React.FC<IProps> = ({
@@ -20,10 +22,11 @@ export const MainLayout: React.FC<IProps> = ({
     showBackButton = false,
     isLoading = false,
     children,
+    className,
 }) => {
     const [logged] = useAuth();
     return (
-        <div className={styles.root}>
+        <div className={cx(styles.root, className)}>
             <Header />
             <ErrorBoundary>
                 <div className={styles.backplate}>

@@ -26,11 +26,12 @@
 }
 
 .content {
-  width: 100%;
+  overflow: hidden;
   box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 @media screen and (max-width: $siteWidthMobile) {
