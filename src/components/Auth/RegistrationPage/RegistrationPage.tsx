@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthSignupMutation } from 'store/api';
 import styles from './RegistrationPage.module.scss';
-import { Loader } from 'components/shared/Loader/Loader';
 import { Input } from 'components/shared/Input/Input';
 import { Button } from 'components/shared/Button/Button';
 import {
@@ -60,9 +59,9 @@ export const RegistrationPage = () => {
     };
 
     return (
-        <MainLayout>
+        <MainLayout isLoading={isLoading}>
             <div className={styles.backplate}>
-                <Loader className={styles.root} isLoading={isLoading}>
+                <div className={styles.root}>
                     <div className={styles.title}>Регистрация</div>
                     <form className={styles.form} noValidate onSubmit={handleSubmit(onSubmit)}>
                         <Input
@@ -103,7 +102,7 @@ export const RegistrationPage = () => {
                             </Button>
                         </div>
                     </form>
-                </Loader>
+                </div>
             </div>
         </MainLayout>
     );

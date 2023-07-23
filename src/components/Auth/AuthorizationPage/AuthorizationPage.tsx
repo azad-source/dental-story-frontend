@@ -7,7 +7,6 @@ import { login } from 'store/apiConfig';
 import styles from './AuthorizationPage.module.scss';
 import { Input } from 'components/shared/Input/Input';
 import { Button } from 'components/shared/Button/Button';
-import { Loader } from 'components/shared/Loader/Loader';
 import { EMAIL_PLACEHOLDER, PASS_PLACEHOLDER } from 'variables/fieldVariables';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -44,9 +43,9 @@ export const AuthorizationPage = () => {
     };
 
     return (
-        <MainLayout>
+        <MainLayout isLoading={isLoading}>
             <div className={styles.backplate}>
-                <Loader className={styles.root} isLoading={isLoading}>
+                <div className={styles.root}>
                     <div className={styles.title}>Авторизация</div>
                     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
                         <Input
@@ -73,7 +72,7 @@ export const AuthorizationPage = () => {
                             </Button>
                         </div>
                     </form>
-                </Loader>
+                </div>
             </div>
             <DevTool control={control} />
         </MainLayout>

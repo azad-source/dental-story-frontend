@@ -1,7 +1,6 @@
 import { BreadcrumbProps } from 'components/shared/Breadcrumbs/Breadcrumbs';
 import { Button } from 'components/shared/Button/Button';
 import { Input } from 'components/shared/Input/Input';
-import { Loader } from 'components/shared/Loader/Loader';
 import { MainLayout } from 'components/shared/MainLayout/MainLayout';
 import { Paths } from 'domain/Paths';
 import { useState } from 'react';
@@ -62,9 +61,9 @@ export const NewPatientPage = () => {
     };
 
     return (
-        <MainLayout breadcrumbs={breadcrumbs} showBackButton>
+        <MainLayout breadcrumbs={breadcrumbs} showBackButton isLoading={false}>
             <div className={styles.backplate}>
-                <Loader className={styles.root} isLoading={false}>
+                <div className={styles.root}>
                     <div className={styles.title}>Добавление нового пациента</div>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <Input
@@ -106,7 +105,7 @@ export const NewPatientPage = () => {
                             <Button type="submit">Добавить</Button>
                         </div>
                     </form>
-                </Loader>
+                </div>
             </div>
         </MainLayout>
     );
